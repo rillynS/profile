@@ -1,0 +1,12 @@
+.CardMedia{
+    max-width: 150px;
+    height: 150px;
+    padding-right: 15px;
+}
+
+.Card{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    width: 100%;
+}
