@@ -1,59 +1,50 @@
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import React, { FC } from "react";
+import React, { FC, MouseEventHandler, useState } from "react";
 import "./CardItem.css";
-import Box from "@mui/material/Box";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import Link from "@mui/material/Link";
+import { CardItemFront } from "./CardItemFront";
+import { CardItemBack } from "./CardItemBack";
 
-interface CardItemTypes {
-  description: string;
-  imgSrc: string;
-  title: string;
-  gitHref?: string;
+interface CardItemType{
+  srcImage?:string;
 }
 
-export const CardItem: FC<CardItemTypes> = ({
-  description,
-  title,
-  imgSrc,
-  gitHref,
-}) => {
-  return (
-    <Card sx={{ maxWidth: "95%" }} className="Card">
-      <Box>
-        <CardContent>
-          <Typography variant="body1" color="secondary">
-            {title}
-          </Typography>
-          <Typography variant="body2" color="secondary">
-            {description}
-          </Typography>
-        </CardContent>
-        <Box>
-          <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <Link href={gitHref} underline="none">
-                <GitHubIcon color="secondary" />
-              </Link>
-            </IconButton>
-          </CardActions>
-        </Box>
-      </Box>
 
-      <CardMedia
-        component="img"
-        height="194"
-        image={imgSrc}
-        className="CardMedia"
-        alt="Paella dish"
-      />
-    </Card>
+export const CardItem: FC<CardItemType> = ({srcImage}) => {
+  const [x, setX] = useState<number>(0)
+  const [y, setY] = useState<number>(0)
+  const [reverse,setReverse] = useState<boolean>(false)
+  function rotate(e:React.MouseEvent<HTMLDivElement>) {
+      const {clientHeight,clientWidth} = (e.target as HTMLDivElement)
+      const XCord = e.nativeEvent.offsetX
+      const YCord = e.nativeEvent.offsetY
+      
+      const changedXCord = Math.round(((clientHeight/2)-YCord)/11)
+      const changedYCord = Math.round(((XCord-clientWidth/2))/11)
+      if(reverse){
+        setX(changedXCord)
+        setY(180 + changedYCord)
+      }else{
+        setX(changedXCord)
+        setY(changedYCord)
+      }
+      
+      
+  } 
+  function leave(){
+    if(reverse){
+      setX(0);
+      setY(180)
+    }else{
+      setX(0);
+      setY(0)
+    }
+  }
+
+  return (
+    <div className="ContainerCardItem" onMouseMove={rotate} onMouseLeave={leave}>
+      <div className="CardBox" style={{transform:`rotateX(${x}deg) rotateY(${y}deg)`}}>
+        <CardItemFront srcImage={srcImage} Reverse={setReverse}/>
+        <CardItemBack Reverse={setReverse} />
+      </div>
+    </div>
   );
 };
