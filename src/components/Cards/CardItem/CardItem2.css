@@ -6,17 +6,44 @@
     margin: 20px;
     z-index: 5;
 }
+
 .CardBox{
+    transform-style: preserve-3d;
+    font-family: trebuchet ms, verdana, arial, sans-serif;
+    transition: all .4s ease;
+    border-radius: 5px;
+
+}
+.CardBox:hover{
+    transform: scale(10px);
+}
+.card{
     position: absolute;
-    z-index: 0;
     width: 230px;
     height: 330px;
-    background-color: aqua;
     border-radius: 5px;
+    backface-visibility: hidden;
+    background: aqua;
+  
+  
+}
+
+.card:last-child {
+    transform: rotateY(180deg);
+}
+
+.CardItemBtn{
+    background:none;
+    border:none;
+    cursor: pointer;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    transform-style:preserve-3d;
-    transition: all .4s ease;
+}
+
+.CardItemBtn-Front{
+    margin-left: auto;
+}
+
+.CardItemBtn-Back{
+
 }
