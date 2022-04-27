@@ -4,7 +4,9 @@ import { green, purple,orange,grey } from "@mui/material/colors";
 export const mainTheme = createTheme({
     palette:{
         primary:{
-            main:orange[400]
+            main:'#00ffff',
+            dark:'#00a2ff',
+            
         },
         secondary:{
             main:'#000'
@@ -14,9 +16,9 @@ export const mainTheme = createTheme({
         MuiButton:{
             styleOverrides:{
                 root:{
-                   background:orange[400],
+                   background:'#00ffff',
                    ":hover":{
-                        background:orange[500]       
+                        background:'#00a2ff'       
                    }
                 },
 
@@ -26,7 +28,7 @@ export const mainTheme = createTheme({
         MuiPaper:{
             styleOverrides:{
                 root:{
-                    background:orange[400],
+                    background:'#00ffff',
                     color:'#000'
                 }
             }

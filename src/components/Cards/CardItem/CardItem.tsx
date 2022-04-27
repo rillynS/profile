@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useState } from "react";
+import React, { FC, useState } from "react";
 import "./CardItem.css";
 import { CardItemFront } from "./CardItemFront";
 import { CardItemBack } from "./CardItemBack";
@@ -12,6 +12,7 @@ export const CardItem: FC<CardItemType> = ({srcImage}) => {
   const [x, setX] = useState<number>(0)
   const [y, setY] = useState<number>(0)
   const [reverse,setReverse] = useState<boolean>(false)
+
   function rotate(e:React.MouseEvent<HTMLDivElement>) {
       const {clientHeight,clientWidth} = (e.target as HTMLDivElement)
       const XCord = e.nativeEvent.offsetX
@@ -29,21 +30,23 @@ export const CardItem: FC<CardItemType> = ({srcImage}) => {
       
       
   } 
-  function leave(){
-    if(reverse){
-      setX(0);
-      setY(180)
-    }else{
-      setX(0);
-      setY(0)
-    }
+  function mouseEnter() {
+    setReverse(true)
+    setX(0);
+    setY(180)
+  }
+
+  function mouseLeave() {
+    setReverse(false)
+    setX(0);
+    setY(0)
   }
 
   return (
-    <div className="ContainerCardItem" onMouseMove={rotate} onMouseLeave={leave}>
+    <div className="ContainerCardItem" onMouseEnter={mouseEnter} onMouseMove={rotate} onMouseLeave={mouseLeave}>
       <div className="CardBox" style={{transform:`rotateX(${x}deg) rotateY(${y}deg)`}}>
-        <CardItemFront srcImage={srcImage} Reverse={setReverse}/>
-        <CardItemBack Reverse={setReverse} />
+        <CardItemFront srcImage={srcImage} />
+        <CardItemBack  />
       </div>
     </div>
   );

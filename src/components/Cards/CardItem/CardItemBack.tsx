@@ -1,15 +1,21 @@
 import React, { FC } from "react";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-
+import GitHubIcon from '@mui/icons-material/GitHub';
+import WebIcon from '@mui/icons-material/Web';
+import Link from '@mui/material/Link';
 interface FrontPropsType{
-    Reverse:(arg:boolean)=>any
 }
 
 
-export const CardItemBack:FC<FrontPropsType> = ({Reverse}) => {
+export const CardItemBack:FC<FrontPropsType> = () => {
     return(
-        <div className="card">
-            <button className="CardItemBtn CardItemBtn-Back" onClick={()=>Reverse(false)}><ArrowBackIosIcon color="inherit" /></button>
+        <div className="card ">
+            <div className="CardItemContent-back">
+                <h4>full description</h4>
+                <div className="CardItemContent-back_btn">
+                    <Link href="#" color='secondary'><GitHubIcon /></Link>
+                    <Link href="#" color='secondary'><WebIcon /></Link>
+                </div>
+            </div>
         </div>
     )
 }
